@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERUBAHAN IKLIM: Memahami Siklus Karbon, Efek Rumah Kaca, dan Aksi Nyata di Sekolah</title>
+    <!-- Tailwind CSS for modern editorial styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { 600: '#556B2F', 700: '#405223', 800: '#2C3817' },
+                        leaf: { 500: '#4C9A2A', 600: '#3D7B21' },
+                        mustard: { 500: '#E1AD01', 600: '#C69700' },
+                        atmos: { 500: '#3B82F6', 650: '#1D4ED8' },
+                        cream: '#FDFBF7',
+                        darkgray: '#1E293B'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Slide aspect ratio container 16:9 simulation */
+        .slide-container {
+            width: 100%;
+            height: 100vh;
+            max-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow-y: auto;
+        }
+        .animate-fade {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar for slide body content */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-darkgray text-gray-800 antialiased overflow-hidden">
+
+    <div id="app" class="w-screen h-screen flex flex-col justify-between bg-cream relative">
+        
+        <!-- Top Navigation / Progress Bar Header -->
+        <header class="w-full bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center shadow-xs z-20">
+            <div class="flex items-center space-x-3">
+                <span class="bg-olive-700 text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Geografi SMA</span>
+                <h1 class="text-sm font-semibold text-gray-700 truncate max-w-md">PERUBAHAN IKLIM: Siklus Karbon, Efek Rumah Kaca & Aksi Nyata</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span id="slide-indicator" class="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Slide 1 dari 32</span>
+                <button onclick="goToSlide(2)" class="text-xs bg-olive-600 hover:bg-olive-700 text-white font-medium px-3 py-1.5 rounded transition shadow-sm flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <span>Menu Utama</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Presentation Slides Viewport -->
+        <main id="slide-viewport" class="flex-1 relative overflow-hidden flex flex-col justify-between p-8 md:p-12">
+            <!-- Slides will be dynamically injected / shown here -->
+        </main>
+
+        <!-- Global Bottom Navigation Bar -->
+        <footer class="w-full bg-white border-t border-gray-200 px-6 py-3 flex justify-between items-center z-20">
+            <div class="flex items-center space-x-2">
+                <button onclick="prevSlide()" id="btn-prev" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold rounded-lg transition flex items-center space-x-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Kembali</span>
+                </button>
+                <button onclick="nextSlide()" id="btn-next" class="px-4 py-2 bg-olive-700 hover:bg-olive-800 text-white text-sm font-semibold rounded-lg transition flex items-center space-x-1 shadow-sm">
+                    <span>Lanjut</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+            <div class="text-xs text-gray-400 font-medium hidden sm:block">Gunakan tombol Navigasi atau Menu untuk menjelajahi 32 Slide Pembelajaran</div>
+            <div class="flex items-center space-x-2">
+                <button onclick="goToSlide(11)" class="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-800 text-xs font-bold rounded transition">Kuis Interaktif</button>
+                <button onclick="goToSlide(28)" class="px-3 py-1.5 bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold rounded transition">Studi Kasus</button>
+                <button onclick="goToSlide(31)" class="px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 text-xs font-bold rounded transition">Ringkasan</button>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Quiz state tracking
+        let quizAnswers = { q1: null, q2: null, q3: null, q4: null, q5: null };
+        let caseStudyChoice = null;
+        let currentSlide = 1;
+        const totalSlides = 32;
+
+        function updateSlideIndicator() {
+            document.getElementById('slide-indicator').innerText = `Slide ${currentSlide} dari ${totalSlides}`;
+            document.getElementById('btn-prev').disabled = currentSlide === 1;
+            document.getElementById('btn-prev').classList.toggle('opacity-50', currentSlide === 1);
+            document.getElementById('btn-next').disabled = currentSlide === totalSlides;
+            document.getElementById('btn-next').classList.toggle('opacity-50', currentSlide === totalSlides);
+        }
+
+        function goToSlide(slideNum) {
+            if (slideNum < 1 || slideNum > totalSlides) return;
+            currentSlide = slideNum;
+            renderSlide(currentSlide);
+            updateSlideIndicator();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                renderSlide(currentSlide);
+                updateSlideIndicator();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                renderSlide(currentSlide);
+                updateSlideIndicator();
+            }
+        }
+
+        function answerQuiz(qNum, optionIndex, correctIndex) {
+            quizAnswers['q' + qNum] = { selected: optionIndex, correct: correctIndex === optionIndex };
+            // Re-render current quiz slide to show feedback
+            renderSlide(currentSlide);
+        }
+
+        function chooseCaseStudy(choice) {
+            caseStudyChoice = choice;
+            renderSlide(29); // Go to evaluation/consequence slide
+        }
+    </script>
+
+    <script>
+        function renderSlide(n) {
+            const viewport = document.getElementById('slide-viewport');
+            let content = '';
+
+            switch(n) {
+                // ----------------------------------------------------
+                // SLIDE 1: Pembuka
+                // ----------------------------------------------------
+                case 1:
+                    content = `
+                        <div class="max-w-6xl mx-auto w-full h-full flex flex-col justify-center items-center text-center animate-fade">
+                            <div class="inline-block bg-olive-700/10 text-olive-800 font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 border border-olive-700/20">Modul Geografi Fase F Kelas XII / Kelas 11-12 SMA</div>
+                            <h2 class="serif-font text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">PERUBAHAN IKLIM</h2>
+                            <p class="text-xl md:text-2xl text-olive-700 font-medium mb-8 max-w-3xl">Memahami Siklus Karbon, Efek Rumah Kaca, dan Aksi Nyata di Sekolah</p>
+                            
+                            <!-- Professional Teacher Illustration / Card Representation -->
+                            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm max-w-2xl w-full mb-8 flex flex-col md:flex-row items-center gap-6">
+                                <div class="w-24 h-24 rounded-full bg-olive-700 flex items-center justify-center text-white text-3xl font-bold shadow-inner">
+                                    👩‍🏫
+                                </div>
+                                <div class="text-left flex-1">
+                                    <div class="text-xs uppercase font-bold text-mustard-600 mb-1">Pengantar Pembelajaran</div>
+                                    <p class="text-gray-700 text-sm leading-relaxed">"Selamat datang! Mari selidiki bagaimana dinamika atmosfer bumi bekerja dan apa peran kita sebagai generasi muda dalam menjaga keseimbangan iklim."</p>
+                                    <p class="text-xs text-gray-500 mt-2 font-semibold">— Guru Geografi Profesional</p>
+                                </div>
+                            </div>
+
+                            <button onclick="goToSlide(2)" class="bg-olive-700 hover:bg-olive-800 text-white font-bold px-8 py-3.5 rounded-xl text-base shadow-lg transition transform hover:-translate-y-0.5 flex items-center space-x-2">
+                                <span>Masuk ke Menu Utama</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                            </button>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 2: Menu Utama
+                // ----------------------------------------------------
+                case 2:
+                    content = `
+                        <div class="max-w-5xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <div class="text-center mb-8">
+                                <h2 class="serif-font text-3xl font-bold text-gray-900 mb-2">Pusat Navigasi & Menu Utama</h2>
+                                <p class="text-gray-600 text-sm">Pilih modul pembelajaran, panduan, kuis, atau studi kasus sesuai kebutuhan Anda.</p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                                <button onclick="goToSlide(3)" class="p-6 bg-white hover:bg-olive-50 border border-gray-200 hover:border-olive-600 rounded-2xl shadow-xs transition text-left group">
+                                    <div class="text-2xl mb-3 text-olive-700 group-hover:scale-110 transition transform">📖</div>
+                                    <h3 class="font-bold text-gray-800 text-base mb-1">Panduan Penggunaan</h3>
+                                    <p class="text-xs text-gray-500">Cara interaktif menavigasi modul materi.</p>
+                                </button>
+                                <button onclick="goToSlide(4)" class="p-6 bg-white hover:bg-olive-50 border border-gray-200 hover:border-olive-600 rounded-2xl shadow-xs transition text-left group">
+                                    <div class="text-2xl mb-3 text-leaf-600 group-hover:scale-110 transition transform">🌍</div>
+                                    <h3 class="font-bold text-gray-800 text-base mb-1">Mulai Materi (Slide 4-10)</h3>
+                                    <p class="text-xs text-gray-500">Kupas tuntas iklim, karbon, & efek rumah kaca.</p>
+                                </button>
+                                <button onclick="goToSlide(11)" class="p-6 bg-white hover:bg-amber-50 border border-gray-200 hover:border-amber-500 rounded-2xl shadow-xs transition text-left group">
+                                    <div class="text-2xl mb-3 text-mustard-600 group-hover:scale-110 transition transform">📝</div>
+                                    <h3 class="font-bold text-gray-800 text-base mb-1">Mulai Kuis (Slide 11-27)</h3>
+                                    <p class="text-xs text-gray-500">Uji pemahaman dengan 5 soal bercabang.</p>
+                                </button>
+                                <button onclick="goToSlide(28)" class="p-6 bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-500 rounded-2xl shadow-xs transition text-left group">
+                                    <div class="text-2xl mb-3 text-atmos-500 group-hover:scale-110 transition transform">🏫</div>
+                                    <h3 class="font-bold text-gray-800 text-base mb-1">Studi Kasus (Slide 28-30)</h3>
+                                    <p class="text-xs text-gray-500">Analisis banjir dan mitigasi di sekolah.</p>
+                                </button>
+                                <button onclick="goToSlide(31)" class="p-6 bg-white hover:bg-emerald-50 border border-gray-200 hover:border-emerald-500 rounded-2xl shadow-xs transition text-left group">
+                                    <div class="text-2xl mb-3 text-emerald-600 group-hover:scale-110 transition transform">📋</div>
+                                    <h3 class="font-bold text-gray-800 text-base mb-1">Ringkasan (Slide 31)</h3>
+                                    <p class="text-xs text-gray-500">Poin penting intisari pembelajaran.</p>
+                                </button>
+                                <button onclick="goToSlide(32)" class="p-6 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-400 rounded-2xl shadow-xs transition text-left group">
+                                    <div class="text-2xl mb-3 text-gray-600 group-hover:scale-110 transition transform">🎯</div>
+                                    <h3 class="font-bold text-gray-800 text-base mb-1">Penutup (Slide 32)</h3>
+                                    <p class="text-xs text-gray-500">Refleksi akhir dan pesan penutup.</p>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 3: Panduan Penggunaan
+                // ----------------------------------------------------
+                case 3:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Panduan Penggunaan Modul</h2>
+                            <p class="text-gray-600 mb-6 text-sm">Modul digital ini dirancang mandiri dan interaktif untuk membantu siswa memahami geografi perubahan iklim secara mendalam.</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs flex items-start space-x-4">
+                                    <span class="bg-olive-700 text-white font-bold w-8 h-8 rounded-lg flex items-center justify-center shrink-0">1</span>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-1">Navigasi Slide</h4>
+                                        <p class="text-xs text-gray-600">Gunakan tombol <strong>Lanjut</strong> dan <strong>Kembali</strong> di bawah, atau langsung akses topik via <strong>Menu Utama</strong>.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs flex items-start space-x-4">
+                                    <span class="bg-olive-700 text-white font-bold w-8 h-8 rounded-lg flex items-center justify-center shrink-0">2</span>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-1">Kuis Interaktif Bercabang</h4>
+                                        <p class="text-xs text-gray-600">Jawab pertanyaan latihan untuk mendapatkan umpan balik langsung dan refleksi pemahaman.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs flex items-start space-x-4">
+                                    <span class="bg-olive-700 text-white font-bold w-8 h-8 rounded-lg flex items-center justify-center shrink-0">3</span>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-1">Studi Kasus Kontekstual</h4>
+                                        <p class="text-xs text-gray-600">Analisis masalah nyata di lingkungan sekolah dan pilih opsi tindakan terbaik.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs flex items-start space-x-4">
+                                    <span class="bg-olive-700 text-white font-bold w-8 h-8 rounded-lg flex items-center justify-center shrink-0">4</span>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-1">Standar Estetika Profesional</h4>
+                                        <p class="text-xs text-gray-600">Desain editorial bersih dengan palet warna zaitun, daun, dan atmosfer.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end">
+                                <button onclick="goToSlide(4)" class="bg-olive-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg shadow hover:bg-olive-800 transition">Mulai Materi Pembelajaran &rarr;</button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 4: Materi 1 - Cuaca Ekstrem & Perubahan Iklim
+                // ----------------------------------------------------
+                case 4:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-olive-700 uppercase tracking-wider mb-1">Materi 1 dari 7 • Dinamika Atmosfer</span>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Cuaca Ekstrem dan Fenomena Global</h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
+                                    <div class="text-xl mb-2 text-blue-600">🌧️</div>
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1">Peningkatan Curah Hujan</h4>
+                                    <p class="text-xs text-gray-600">Siklus hidrologi yang semakin intens menyebabkan badai tropis dan banjir bandang lebih sering.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
+                                    <div class="text-xl mb-2 text-amber-600">☀️</div>
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1">Gelombang Panas (Heatwaves)</h4>
+                                    <p class="text-xs text-gray-600">Suhu permukaan rata-rata global meningkat, memicu kekeringan panjang dan kegagalan panen.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
+                                    <div class="text-xl mb-2 text-emerald-600">🌊</div>
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1">Kenaikan Muka Air Laut</h4>
+                                    <p class="text-xs text-gray-600">Pencairan es kutub dan pemuaian termal air laut mengancam wilayah pesisir dan pulau kecil.</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-olive-50 border-l-4 border-olive-700 p-4 rounded-r-xl">
+                                <p class="text-xs text-olive-800 font-medium"><strong>Konsep Geografi:</strong> Perubahan iklim bukan sekadar fluktuasi cuaca harian, melainkan pergeseran pola statistik jangka panjang (30 tahun atau lebih) pada sistem iklim bumi.</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 5: Materi 2 - Efek Rumah Kaca (ERK)
+                // ----------------------------------------------------
+                case 5:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-olive-700 uppercase tracking-wider mb-1">Materi 2 dari 7 • Mekanisme Atmosfer</span>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Memahami Efek Rumah Kaca (Greenhouse Effect)</h2>
+                            
+                            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs mb-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-2">Proses Alami Pemanasan Bumi</h4>
+                                        <p class="text-xs text-gray-600 leading-relaxed mb-3">Tanpa efek rumah kaca alami, suhu rata-rata permukaan bumi akan mencapai -18°C sehingga tidak layak huni. Gas rumah kaca (seperti $CO_2$, $CH_4$, dan uap air) menyerap dan memantulkan kembali radiasi panas inframerah ke bumi.</p>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Suhu Layak Huni: +15°C</span>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-center">
+                                        <div class="text-3xl mb-2">☀️ ⇄ 🌍 ⇄ ☁️</div>
+                                        <p class="text-xs font-semibold text-gray-700">Radiasi Matahari vs Pantulan Inframerah</p>
+                                        <p class="text-[11px] text-gray-500 mt-1">Gas rumah kaca bertindak selimut termal atmosfer.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 6: Materi 3 - Siklus Karbon Global
+                // ----------------------------------------------------
+                case 6:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-olive-700 uppercase tracking-wider mb-1">Materi 3 dari 7 • Biogeokimia</span>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Siklus Karbon: Reservoar & Aliran Alami</h2>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <div class="text-xl mb-1 text-emerald-600">🌳</div>
+                                    <h4 class="font-bold text-gray-800 text-sm">Biosfer & Hutan</h4>
+                                    <p class="text-xs text-gray-600 mt-1">Fotosintesis menyerap $CO_2$ dari udara dan menyimpannya dalam biomassa kayu dan tanah.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <div class="text-xl mb-1 text-blue-600">🌊</div>
+                                    <h4 class="font-bold text-gray-800 text-sm">Lautan (Ocean Sink)</h4>
+                                    <p class="text-xs text-gray-600 mt-1">Menyerap sebagian besar karbon dioksida berlebih, namun memicu pengasaman air laut.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <div class="text-xl mb-1 text-amber-600">⛏️</div>
+                                    <h4 class="font-bold text-gray-800 text-sm">Litosfer & Batuan</h4>
+                                    <p class="text-xs text-gray-600 mt-1">Bahan bakar fosil dan endapan karbonat dalam kerak bumi (penyimpanan jangka panjang).</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-amber-50 border-l-4 border-mustard-500 p-4 rounded-r-xl">
+                                <p class="text-xs text-amber-900 font-medium"><strong>Ketidakseimbangan:</strong> Aktivitas pembakaran bahan bakar fosil melepas karbon purba ke atmosfer lebih cepat dari kemampuan alam menyerapnya kembali.</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 7: Materi 4 - Aktivitas Manusia & Emisi
+                // ----------------------------------------------------
+                case 7:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-olive-700 uppercase tracking-wider mb-1">Materi 4 dari 7 • Antroposena</span>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Aktivitas Manusia & Peningkatan Emisi Gas Rumah Kaca</h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <h4 class="font-bold text-gray-800 text-sm mb-2 flex items-center space-x-2">
+                                        <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                                        <span>Sektor Energi & Industri</span>
+                                    </h4>
+                                    <p class="text-xs text-gray-600">Pembakaran batubara, minyak bumi, dan gas alam untuk pembangkit listrik serta pabrik menyumbang porsi emisi $CO_2$ terbesar di dunia.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <h4 class="font-bold text-gray-800 text-sm mb-2 flex items-center space-x-2">
+                                        <span class="w-3 h-3 bg-amber-500 rounded-full"></span>
+                                        <span>Deforestasi & Alih Fungsi Lahan</span>
+                                    </h4>
+                                    <p class="text-xs text-gray-600">Penebangan hutan dan kebakaran lahan gambut menghilangkan kapasitas penyerapan karbon alami sekaligus melepas cadangan karbon ke atmosfer.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <h4 class="font-bold text-gray-800 text-sm mb-2 flex items-center space-x-2">
+                                        <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
+                                        <span>Transportasi Massal Fosil</span>
+                                    </h4>
+                                    <p class="text-xs text-gray-600">Kendaraan bermotor pribadi berbahan bakar minyak memancarkan jutaan ton gas buang setiap harinya di perkotaan.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <h4 class="font-bold text-gray-800 text-sm mb-2 flex items-center space-x-2">
+                                        <span class="w-3 h-3 bg-emerald-500 rounded-full"></span>
+                                        <span>Pertanian & Peternakan</span>
+                                    </h4>
+                                    <p class="text-xs text-gray-600">Penggunaan pupuk kimia berbasis nitrogen dan fermentasi enterik ternak memancarkan gas metana ($CH_4$) dan dinitrogen oksida ($N_2O$).</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 8: Materi 5 - Dampak Perubahan Iklim di Indonesia
+                // ----------------------------------------------------
+                case 8:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-olive-700 uppercase tracking-wider mb-1">Materi 5 dari 7 • Geografi Regional</span>
+                           <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Dampak Perubahan Iklim di Wilayah Indonesia</h2>
+                           
+                           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                               <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                   <div class="text-xl mb-2 text-cyan-600">🏝️</div>
+                                   <h4 class="font-bold text-gray-800 text-sm mb-1">Abrasi & Tenggelamnya Pesisir</h4>
+                                   <p class="text-xs text-gray-600">Ancaman bagi pulau-pulau kecil dan pemukiman nelayan di Pantura Jawa dan pesisir luar.</p>
+                               </div>
+                               <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                   <div class="text-xl mb-2 text-amber-600">🌾</div>
+                                   <h4 class="font-bold text-gray-800 text-sm mb-1">Kerentanan Sektor Pertanian</h4>
+                                   <p class="text-xs text-gray-600">Pergeseran musim tanam akibat anomali El Niño dan La Niña menurunkan hasil panen petani lokal.</p>
+                               </div>
+                               <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                   <div class="text-xl mb-2 text-red-600">🔥</div>
+                                   <h4 class="font-bold text-gray-800 text-sm mb-1">Kebakaran Hutan & Lahan</h4>
+                                   <p class="text-xs text-gray-600">Musim kemarau panjang memicu kebakaran lahan gambut yang menghasilkan kabut asap lintas batas.</p>
+                               </div>
+                           </div>
+                           <p class="text-xs text-gray-500 italic text-center">Sebagai negara kepulauan tropis, Indonesia termasuk wilayah yang paling rentan terhadap risiko perubahan iklim global.</p>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 9: Materi 6 - Aksi Nyata di Sekolah
+                // ----------------------------------------------------
+                case 9:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-olive-700 uppercase tracking-wider mb-1">Materi 6 dari 7 • Aksi Komunitas</span>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Aksi Nyata Mitigasi & Adaptasi di Lingkungan Sekolah</h2>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 flex items-start space-x-3">
+                                    <span class="text-2xl">⚡</span>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-1">Efisiensi Energi Sekolah</h4>
+                                        <p class="text-xs text-gray-600">Mematikan lampu, AC, dan komputer saat tidak digunakan serta beralih ke lampu LED hemat energi.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 flex items-start space-x-3">
+                                    <span class="text-2xl">🌱</span>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-1">Penghijauan & Biopori</h4>
+                                        <p class="text-xs text-gray-600">Membuat lubang biopori resapan air hujan di halaman sekolah dan menanam pohon pelindung.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 flex items-start space-x-3">
+                                    <span class="text-2xl">♻️</span>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-1">Pengelolaan Sampah Mandiri</h4>
+                                        <p class="text-xs text-gray-600">Menerapkan 3R (Reduce, Reuse, Recycle) dan pengomposan sampah organik kantin sekolah.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200 flex items-start space-x-3">
+                                    <span class="text-2xl">🚲</span>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-sm mb-1">Mobilitas Berkelanjutan</h4>
+                                        <p class="text-xs text-gray-600">Mendorong berjalan kaki, bersepeda ke sekolah, atau menggunakan angkutan umum bersama.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 10: Materi 7 - Menghitung Jejak Karbon (Carbon Footprint)
+                // ----------------------------------------------------
+                case 10:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-olive-700 uppercase tracking-wider mb-1">Materi 7 dari 7 • Kalkulasi Emisi</span>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Menghitung dan Mengurangi Jejak Karbon Pribadi</h2>
+                            
+                            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs mb-6">
+                                <h4 class="font-bold text-gray-800 text-sm mb-3">Komponen Utama Jejak Karbon Harian:</h4>
+                                <ul class="space-y-2 text-xs text-gray-700 mb-4">
+                                    <li class="flex items-center space-x-2"><span>🚗</span><span><strong>Transportasi:</strong> Jenis kendaraan dan jarak tempuh perjalanan ke sekolah.</span></li>
+                                    <li class="flex items-center space-x-2"><span>💡</span><span><strong>Konsumsi Energi:</strong> Penggunaan listrik rumah tangga (AC, lampu, gadget).</span></li>
+                                    <li class="flex items-center space-x-2"><span>🛍️</span><span><strong>Pola Konsumsi:</strong> Pembelian pakaian, makanan cepat saji, dan produk plastik sekali pakai.</span></li>
+                                </ul>
+                                <div class="bg-olive-50 p-3 rounded-lg text-xs text-olive-800">
+                                    <strong>Aksi Pengurangan:</strong> Kurangi jejak karbon dengan mencetak bolak-balik kertas, membawa tumbler air minum, dan mengurangi sisa makanan (food waste).
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Selesai bagian materi. Siap menguji pemahaman?</span>
+                                <button onclick="goToSlide(11)" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-5 py-2.5 rounded-lg shadow transition">Mulai Sesi Kuis Interaktif &rarr;</button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 11: Pengantar Kuis
+                // ----------------------------------------------------
+                case 11:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center items-center text-center animate-fade">
+                            <div class="w-20 h-20 bg-amber-100 text-amber-700 rounded-3xl flex items-center justify-center text-3xl mb-4 font-bold shadow-inner">
+                                🎯
+                            </div>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-2">Evaluasi Pemahaman: Kuis Interaktif</h2>
+                            <p class="text-gray-600 text-sm max-w-xl mb-8">Uji pemahaman Anda melalui 5 pertanyaan pilihan ganda bercabang dengan umpan balik instan untuk memperkuat konsep geografi iklim.</p>
+                            
+                            <button onclick="goToSlide(12)" class="bg-olive-700 hover:bg-olive-800 text-white font-bold px-8 py-3 rounded-xl text-sm shadow transition flex items-center space-x-2">
+                                <span>Mulai Pertanyaan 1</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 12: Kuis Soal 1
+                // ----------------------------------------------------
+                case 12:
+                    let ans1 = quizAnswers.q1;
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-amber-600 uppercase">Kuis • Pertanyaan 1 dari 5</span>
+                                <span class="text-xs text-gray-500">Topik: Efek Rumah Kaca</span>
+                            </div>
+                            <h3 class="serif-font text-xl md:text-2xl font-bold text-gray-900 mb-6">Apa fungsi utama dari gas rumah kaca alami di atmosfer bumi?</h3>
+                            
+                            <div class="space-y-3 mb-6">
+                                ${generateOptionHTML(1, 0, "Menghalau seluruh radiasi ultraviolet berbahaya dari matahari.", ans1)}
+                                ${generateOptionHTML(1, 1, "Menangkap sebagian panas inframerah yang dipantulkan bumi agar suhu tetap layak huni.", ans1, true)}
+                                ${generateOptionHTML(1, 2, "Menghasilkan oksigen murni untuk pernapasan makhluk hidup di daratan.", ans1)}
+                                ${generateOptionHTML(1, 3, "Menurunkan suhu permukaan bumi pada malam hari secara drastis.", ans1)}
+                            </div>
+
+                            ${ans1 !== null ? renderFeedbackBox(ans1.correct, 13) : ''}
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 13: Kuis Soal 2
+                // ----------------------------------------------------
+                case 13:
+                    let ans2 = quizAnswers.q2;
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-amber-600 uppercase">Kuis • Pertanyaan 2 dari 5</span>
+                                <span class="text-xs text-gray-500">Topik: Siklus Karbon</span>
+                            </div>
+                            <h3 class="serif-font text-xl md:text-2xl font-bold text-gray-900 mb-6">Reservoar alami terbesar yang menyerap karbon dioksida di permukaan bumi adalah...</h3>
+                            
+                            <div class="space-y-3 mb-6">
+                                ${generateOptionHTML(2, 0, "Kendaraan bermotor dan kawasan industri perkotaan.", ans2)}
+                                ${generateOptionHTML(2, 1, "Lapisan stratosfer dan lapisan ozon.", ans2)}
+                                ${generateOptionHTML(2, 2, "Lautan (Ocean Sink) dan biosfer daratan (Hutan).", ans2, true)}
+                                ${generateOptionHTML(2, 3, "Gedung-gedung bertingkat perkotaan.", ans2)}
+                            </div>
+
+                            ${ans2 !== null ? renderFeedbackBox(ans2.correct, 14) : ''}
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 14: Kuis Soal 3
+                // ----------------------------------------------------
+                case 14:
+                    let ans3 = quizAnswers.q3;
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-amber-600 uppercase">Kuis • Pertanyaan 3 dari 5</span>
+                                <span class="text-xs text-gray-500">Topik: Aktivitas Manusia</span>
+                            </div>
+                            <h3 class="serif-font text-xl md:text-2xl font-bold text-gray-900 mb-6">Aktivitas antroposentris manakah yang menjadi penyumbang terbesar emisi gas rumah kaca global?</h3>
+                            
+                            <div class="space-y-3 mb-6">
+                                ${generateOptionHTML(3, 0, "Penggunaan sepeda dan berjalan kaki ke sekolah.", ans3)}
+                                ${generateOptionHTML(3, 1, "Pembakaran bahan bakar fosil untuk energi dan industri.", ans3, true)}
+                                ${generateOptionHTML(3, 2, "Penanaman pohon bakau di kawasan pesisir pantai.", ans3)}
+                                ${generateOptionHTML(3, 3, "Pembuatan lubang biopori di halaman rumah.", ans3)}
+                            </div>
+
+                            ${ans3 !== null ? renderFeedbackBox(ans3.correct, 15) : ''}
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 15: Kuis Soal 4
+                // ----------------------------------------------------
+                case 15:
+                    let ans4 = quizAnswers.q4;
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-amber-600 uppercase">Kuis • Pertanyaan 4 dari 5</span>
+                                <span class="text-xs text-gray-500">Topik: Dampak Regional</span>
+                            </div>
+                            <h3 class="serif-font text-xl md:text-2xl font-bold text-gray-900 mb-6">Mengapa wilayah Indonesia sangat rentan terhadap dampak perubahan iklim?</h3>
+                            
+                            <div class="space-y-3 mb-6">
+                                ${generateOptionHTML(4, 0, "Karena terletak di daratan kontinen yang luas tanpa laut.", ans4)}
+                                ${generateOptionHTML(4, 1, "Karena merupakan negara kepulauan tropis dengan garis pantai terpanjang kedua di dunia.", ans4, true)}
+                                ${generateOptionHTML(4, 2, "Karena tidak memiliki hutan hujan tropis sama sekali.", ans4)}
+                                ${generateOptionHTML(4, 3, "Karena letaknya berada tepat di kutub utara bumi.", ans4)}
+                            </div>
+
+                            ${ans4 !== null ? renderFeedbackBox(ans4.correct, 16) : ''}
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 16: Kuis Soal 5
+                // ----------------------------------------------------
+                case 16:
+                    let ans5 = quizAnswers.q5;
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-amber-600 uppercase">Kuis • Pertanyaan 5 dari 5</span>
+                                <span class="text-xs text-gray-500">Topik: Aksi Nyata</span>
+                            </div>
+                            <h3 class="serif-font text-xl md:text-2xl font-bold text-gray-900 mb-6">Bentuk aksi nyata mitigasi perubahan iklim yang dapat dilakukan di lingkungan sekolah adalah...</h3>
+                            
+                            <div class="space-y-3 mb-6">
+                                ${generateOptionHTML(5, 0, "Membiarkan lampu kelas menyala sepanjang hari.", ans5)}
+                                ${generateOptionHTML(5, 1, "Membakar sampah plastik di halaman belakang sekolah.", ans5)}
+                                ${generateOptionHTML(5, 2, "Melakukan efisiensi energi, penghijauan, dan pengelolaan sampah 3R.", ans5, true)}
+                                ${generateOptionHTML(5, 3, "Menggunakan kendaraan pribadi bermesin diesel setiap hari.", ans5)}
+                            </div>
+
+                            ${ans5 !== null ? renderFeedbackBox(ans5.correct, 27) : ''}
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 17-26: Placeholder / Buffer Quiz Navigation slides or Results
+                // ----------------------------------------------------
+                case 17: case 18: case 19: case 20: case 21: case 22: case 23: case 24: case 25: case 26:
+                    // Direct user conveniently to results if they land here
+                    goToSlide(27);
+                    return;
+
+                // ----------------------------------------------------
+                // SLIDE 27: Hasil Kuis & Refleksi Mandiri
+                // ----------------------------------------------------
+                case 27:
+                    let score = Object.values(quizAnswers).filter(a => a && a.correct).length;
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center items-center text-center animate-fade">
+                            <div class="w-20 h-20 bg-emerald-100 text-emerald-700 rounded-3xl flex items-center justify-center text-3xl mb-4 font-bold shadow-inner">
+                                📊
+                            </div>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-2">Hasil Evaluasi Kuis Interaktif</h2>
+                            <p class="text-gray-600 text-sm mb-6">Anda berhasil menjawab benar <strong class="text-emerald-700 text-lg">${score}</strong> dari 5 pertanyaan.</p>
+                            
+                            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs max-w-lg w-full mb-6 text-left">
+                                <h4 class="font-bold text-gray-800 text-sm mb-2">Refleksi Mandiri Siswa:</h4>
+                                <p class="text-xs text-gray-600 leading-relaxed">Pemahaman tentang siklus karbon dan efek rumah kaca adalah landasan dalam merancang strategi mitigasi adaptif di daerah masing-masing.</p>
+                            </div>
+
+                            <div class="flex space-x-3">
+                                <button onclick="goToSlide(12)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Coba Kuis Lagi</button>
+                                <button onclick="goToSlide(28)" class="bg-olive-700 hover:bg-olive-800 text-white font-bold px-6 py-2.5 rounded-xl text-xs shadow transition">Lanjut ke Studi Kasus &rarr;</button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 28: Studi Kasus - Banjir di Sekolah
+                // ----------------------------------------------------
+                case 28:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">Studi Kasus Kontekstual • Analisis Lapangan</span>
+                            <h2 class="serif-font text-2xl md:text-3xl font-bold text-gray-900 mb-4">Kasus: Genangan Banjir Rutin di Halaman Sekolah</h2>
+                            
+                            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs mb-6">
+                                <p class="text-xs md:text-sm text-gray-700 leading-relaxed mb-4">
+                                    Setiap kali hujan deras dengan intensitas tinggi (>50 mm/jam) mengguyur kawasan sekolah, halaman depan dan ruang kelas lantai bawah selalu tergenang air setinggi 20-30 cm. Hal ini disebabkan oleh penutupan paving blok yang masif tanpa sumur resapan serta saluran drainase yang tersumbat sedimen dan sampah plastik.
+                                </p>
+                                <h4 class="font-bold text-gray-800 text-sm mb-3">Sebagai Tim Adiwiyata Sekolah, tindakan prioritas apa yang paling tepat Andausulkan?</h4>
+                                
+                                <div class="space-y-2.5">
+                                    <button onclick="chooseCaseStudy('A')" class="w-full text-left p-3.5 rounded-xl border border-gray-200 hover:border-blue-500 hover:bg-blue-50 text-xs text-gray-700 font-medium transition flex items-center justify-between">
+                                        <span>A. Membongkar seluruh paving dan membiarkan tanah terbuka tanpa saluran air.</span>
+                                        <span class="text-blue-600 font-bold">&rarr;</span>
+                                    </button>
+                                    <button onclick="chooseCaseStudy('B')" class="w-full text-left p-3.5 rounded-xl border border-gray-200 hover:border-blue-500 hover:bg-blue-50 text-xs text-gray-700 font-medium transition flex items-center justify-between">
+                                        <span>B. Membersihkan drainase secara berkala serta membuat sumur biopori dan taman hujan (rain garden).</span>
+                                        <span class="text-blue-600 font-bold">&rarr;</span>
+                                    </button>
+                                    <button onclick="chooseCaseStudy('C')" class="w-full text-left p-3.5 rounded-xl border border-gray-200 hover:border-blue-500 hover:bg-blue-50 text-xs text-gray-700 font-medium transition flex items-center justify-between">
+                                        <span>C. Meliburkan kegiatan sekolah setiap kali musim hujan tiba tanpa solusi teknis.</span>
+                                        <span class="text-blue-600 font-bold">&rarr;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 29: Studi Kasus - Pembahasan & Konsekuensi
+                // ----------------------------------------------------
+                case 29:
+                    let isCorrectChoice = caseStudyChoice === 'B';
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">Analisis Studi Kasus</span>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-4">Pembahasan & Konsekuensi Pilihan</h2>
+                            
+                            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs mb-6">
+                                <div class="mb-4">
+                                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold ${isCorrectChoice ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'} mb-2">
+                                        Pilihan Anda: ${caseStudyChoice ? 'Opsi ' + caseStudyChoice : 'Belum memilih'} ${isCorrectChoice ? '(Tepat & Berkelanjutan!)' : '(Kurang Efektif)'}
+                                    </span>
+                                    <p class="text-xs text-gray-700 leading-relaxed">
+                                        ${isCorrectChoice 
+                                            ? 'Luar biasa! Pembuatan sumur biopori dan rain garden mengembalikan fungsi hidrologi tanah (infiltrasi) secara alami, sementara pembersihan drainase memperlancar aliran limpasan air permukaan.' 
+                                            : 'Opsi tersebut kurang menyelesaikan akar masalah hidrologi sekolah. Pendekatan terbaik adalah kombinasi perbaikan drainase, pembuatan biopori, dan manajemen resapan air hujan.'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <button onclick="goToSlide(28)" class="text-xs text-gray-600 hover:text-gray-900 font-semibold">&larr; Coba Pilihan Lain</button>
+                                <button onclick="goToSlide(31)" class="bg-olive-700 hover:bg-olive-800 text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow transition">Lanjut ke Ringkasan &rarr;</button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 30: Buffer / Transisi
+                // ----------------------------------------------------
+                case 30:
+                    goToSlide(31);
+                    return;
+
+                // ----------------------------------------------------
+                // SLIDE 31: Ringkasan Materi Lengkap
+                // ----------------------------------------------------
+                case 31:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center animate-fade">
+                            <span class="text-xs font-bold text-olive-700 uppercase tracking-wider mb-1">Intisari Pembelajaran</span>
+                            <h2 class="serif-font text-3xl font-bold text-gray-900 mb-6">Ringkasan Materi Lengkap</h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1 text-olive-700">1. Efek Rumah Kaca</h4>
+                                    <p class="text-xs text-gray-600">Proses alami yang menahan panas bumi, namun berlebih akibat emisi gas antropogenik.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1 text-olive-700">2. Siklus Karbon</h4>
+                                    <p class="text-xs text-gray-600">Aliran karbon antar biosfer, lautan, dan litosfer yang terganggu oleh pembakaran bahan bakar fosil.</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-gray-200">
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1 text-olive-700">3. Aksi Nyata</h4>
+                                    <p class="text-xs text-gray-600">Mitigasi melalui efisiensi energi, biopori, pengelolaan sampah, dan penghijauan di sekolah.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end">
+                                <button onclick="goToSlide(32)" class="bg-olive-700 hover:bg-olive-800 text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow transition">Menuju Penutup &rarr;</button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                // ----------------------------------------------------
+                // SLIDE 32: Penutup & Terima Kasih
+                // ----------------------------------------------------
+                case 32:
+                    content = `
+                        <div class="max-w-4xl mx-auto w-full h-full flex flex-col justify-center items-center text-center animate-fade">
+                            <div class="w-20 h-20 bg-olive-700 text-white rounded-full flex items-center justify-center text-3xl mb-4 font-bold shadow-md">
+                                🌱
+                            </div>
+                            <h2 class="serif-font text-4xl font-bold text-gray-900 mb-3">Terima Kasih!</h2>
+                            <p class="text-gray-600 text-sm max-w-xl mb-6">"Bumi bukanlah warisan dari nenek moyang kita, melainkan pinjaman dari anak cucu kita." Mari jaga iklim bumi mulai dari langkah kecil di sekolah.</p>
+                            
+                            <div class="flex space-x-4">
+                                <button onclick="goToSlide(1)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-xl text-xs transition">Kembali ke Slide 1</button>
+                                <button onclick="goToSlide(2)" class="bg-olive-700 hover:bg-olive-800 text-white font-bold px-6 py-3 rounded-xl text-xs shadow transition">Buka Menu Utama</button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+
+            viewport.innerHTML = content;
+        }
+
+        // Helper to generate quiz option HTML
+        function generateOptionHTML(qNum, optIdx, text, ansState, isCorrect = false) {
+            let isSelected = ansState !== null && ansState.selected === optIdx;
+            let btnClass = "w-full text-left p-4 rounded-xl border text-xs transition flex items-center justify-between ";
+            
+            if (ansState === null) {
+                btnClass += "bg-white border-gray-200 hover:border-olive-600 hover:bg-olive-50/50 text-gray-800 font-medium";
+            } else {
+                if (isCorrect) {
+                    btnClass += "bg-emerald-50 border-emerald-500 text-emerald-900 font-bold";
+                } else if (isSelected && !isCorrect) {
+                    btnClass += "bg-red-50 border-red-400 text-red-900 font-medium";
+                } else {
+                    btnClass += "bg-white border-gray-200 text-gray-400 opacity-60";
+                }
+            }
+
+            return `
+                <button onclick="answerQuiz(${qNum}, ${optIdx}, ${isCorrect ? optIdx : (optIdx === 0 ? 1 : 0)})" class="${btnClass}">
+                    <span>${text}</span>
+                    <span class="font-bold">${ansState !== null ? (isCorrect ? '✓ Benar' : (isSelected ? '✗ Pilihan Anda' : '')) : '&rarr;'}</span>
+                </button>
+            `;
+        }
+
+        // Helper to generate feedback box
+        function renderFeedbackBox(isCorrect, nextSlideNum) {
+            return `
+                <div class="p-4 rounded-xl ${isCorrect ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-amber-50 border border-amber-200 text-amber-900'} flex justify-between items-center animate-fade">
+                    <div>
+                        <p class="font-bold text-xs mb-0.5">${isCorrect ? '🎉 Jawaban Anda Benar!' : '💡 Kurang Tepat, Silakan Pelajari Kembali'}</p>
+                        <p class="text-[11px] opacity-90">${isCorrect ? 'Pertahankan pemahaman konseptual geografi Anda.' : 'Perhatikan kembali penjelasan materi efek rumah kaca & siklus karbon.'}</p>
+                    </div>
+                    <button onclick="goToSlide(${nextSlideNum})" class="bg-gray-900 hover:bg-black text-white font-bold text-xs px-4 py-2 rounded-lg shadow transition shrink-0 ml-4">Soal Berikutnya &rarr;</button>
+                </div>
+            `;
+        }
+
+        // Initial load on window startup
+        window.onload = function() {
+            goToSlide(1);
+        };
+    </script>
+
+</body>
+</html>
